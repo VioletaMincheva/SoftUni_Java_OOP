@@ -1,0 +1,28 @@
+package JavaOOP.WorkingWithAbstraction.TrafficLights_ex4;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] currentLight = scanner.nextLine().split("\\s+");
+        List<TrafficLights> trafficLightsList = new ArrayList<>();
+
+        for (int i = 0; i < currentLight.length; i++) {
+            TrafficLights trafficLights = new TrafficLights(TrafficLightsSignals.valueOf(currentLight[i]));
+            trafficLightsList.add(trafficLights);
+        }
+
+        int numberOfUpdates = Integer.parseInt(scanner.nextLine());
+        for (int i = 0; i < numberOfUpdates; i++) {
+            for (TrafficLights currentTrafficLight : trafficLightsList) {
+                currentTrafficLight.updated();
+                System.out.print(currentTrafficLight + " ");
+            }
+            System.out.println();
+        }
+    }
+}
