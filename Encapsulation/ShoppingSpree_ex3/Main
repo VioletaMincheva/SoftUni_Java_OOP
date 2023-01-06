@@ -1,0 +1,56 @@
+package Encapsulation.ShoppingSpree_ex3;
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        LinkedHashSet<Person> people = new LinkedHashSet<>();
+        LinkedHashSet<Product> products = new LinkedHashSet<>();
+
+        String[] inputPeople = scanner.nextLine().split(";");
+
+        for (int i = 0; i < inputPeople.length; i++) {
+            String[] personAndMoney = inputPeople[i].split("=");
+            String namePerson = personAndMoney[0];
+            double moneyPerson = Double.parseDouble(personAndMoney[1]);
+            Person currentPerson = new Person(namePerson, moneyPerson);
+            people.add(currentPerson);
+        }
+
+        String[] inputProducts = scanner.nextLine().split(";");
+
+        for (int i = 0; i < inputProducts.length; i++) {
+            String[] productsAndCosts = inputProducts[i].split("=");
+            String nameProduct = productsAndCosts[0];
+            double costProduct = Double.parseDouble(productsAndCosts[1]);
+            Product currentProduct = new Product(nameProduct, costProduct);
+            products.add(currentProduct);
+        }
+
+        String command = scanner.nextLine();
+        while (!command.equals("END")) {
+            String[] tokens = command.split("\\s+");
+            String currentPersonName = tokens[0];
+            String currentProductName = tokens[1];
+
+            for (Person person : people) {
+                if (person.getName().equals(currentPersonName)){
+                    for (Product product : products) {
+                        if (product.getName().equals(currentProductName)){
+                            person.buyProduct(product);
+                        }
+                    }
+                }
+            }
+            command = scanner.nextLine();
+        }
+
+
+        for (Person person : people) {
+            System.out.println(person.toString());
+        }
+    }
+}
