@@ -1,0 +1,60 @@
+package Inheritance.Animals_ex6;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        List<Animal> animalsList = new ArrayList<>();
+
+        String typeOfAnimal = scanner.nextLine();
+
+        while (!typeOfAnimal.equals("Beast!")) {
+            String[] input = scanner.nextLine().split("\\s+");
+            String name = input[0];
+            int age = Integer.parseInt(input[1]);
+            String gender = input[2];
+
+            Animal animal = null;
+            try {
+                switch (typeOfAnimal) {
+                    case "Dog":
+                        animal = new Dog(name, age, gender);
+                        animalsList.add(animal);
+                        break;
+                    case "Frog":
+                        animal = new Frog(name, age, gender);
+                        animalsList.add(animal);
+                        break;
+                    case "Cat":
+                        animal = new Cat(name, age, gender);
+                        animalsList.add(animal);
+                        break;
+                    case "Kitten":
+                        animal = new Kitten(name, age);
+                        animalsList.add(animal);
+                        break;
+                    case "Tomcat":
+                        animal = new Tomcat(name, age);
+                        animalsList.add(animal);
+                        break;
+                    default:
+                        System.out.println("Invalid input!");
+                        break;
+                }
+            } catch (IllegalArgumentException exception) {
+                System.out.println(exception.getMessage());
+            } catch (IndexOutOfBoundsException exception) {
+                System.out.println("Invalid input!");
+            }
+            typeOfAnimal = scanner.nextLine();
+        }
+
+        for (Animal currentAnimal : animalsList) {
+            System.out.println(currentAnimal.toString());
+        }
+    }
+}
