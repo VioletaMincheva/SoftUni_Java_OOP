@@ -1,6 +1,6 @@
 package Inheritance.Animals_ex6;
 
-public class Tomcat extends Animal {
+public class Tomcat extends Cat {
     final static String GENDER = "Male";
     final static String TOMCAT_SOUND = "MEOW";
 
