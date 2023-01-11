@@ -1,0 +1,46 @@
+package InterfacesAndAbstraction.BirthdayCelebrations_ex3;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Birthable> birthDatesList = new ArrayList<>();
+
+        String input = scanner.nextLine();
+        while (!input.equals("End")) {
+            String[] tokens = input.split("\\s+");
+            String type = tokens[0];
+            switch (type) {
+                case "Citizen":
+                    String name = tokens[1];
+                    int age = Integer.parseInt(tokens[2]);
+                    String id = tokens[3];
+                    String birthDate = tokens[4];
+                    birthDatesList.add(new Citizen(name, age, id, birthDate));
+                    break;
+                case "Pet":
+                    String namePet = tokens[1];
+                    String birthDatePet = tokens[2];
+                    birthDatesList.add(new Pet(namePet, birthDatePet));
+                    break;
+                case "Robot":
+                    String model = tokens[1];
+                    String idRobot = tokens[2];
+                    Robot robot = new Robot(model, idRobot);
+                    break;
+            }
+            input = scanner.nextLine();
+        }
+
+        String year = scanner.nextLine();
+        for (Birthable birthable : birthDatesList) {
+            if (birthable.getBirthDate().endsWith(year)) {
+                System.out.println(birthable.getBirthDate());
+            }
+        }
+
+    }
+}
