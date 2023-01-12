@@ -1,0 +1,39 @@
+package InterfacesAndAbstraction.FoodShortage_ex4;
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        HashMap<String, Buyer> buyerHashMap = new HashMap<>();
+
+        int numberOfPeople = Integer.parseInt(scanner.nextLine());
+        for (int i = 0; i < numberOfPeople; i++) {
+            String[] input = scanner.nextLine().split("\\s+");
+            String name = input[0];
+            int age = Integer.parseInt(input[1]);
+            if (input.length == 4) {
+                String id = input[2];
+                String birthDate = input[3];
+                buyerHashMap.putIfAbsent(name, new Citizen(name, age, id, birthDate));
+            } else {
+                String group = input[2];
+                buyerHashMap.putIfAbsent(name, (new Rebel(name, age, group)));
+            }
+        }
+        String personWhoBuyFood = scanner.nextLine();
+        while (!personWhoBuyFood.equals("End")) {
+            if (buyerHashMap.containsKey(personWhoBuyFood)) {
+                buyerHashMap.get(personWhoBuyFood).buyFood();
+            }
+            personWhoBuyFood = scanner.nextLine();
+        }
+        int totalFood = 0;
+        for (Map.Entry<String, Buyer> entry : buyerHashMap.entrySet()) {
+            String key = entry.getKey();
+            Buyer value = entry.getValue();
+            totalFood += value.getFood();
+        }
+        System.out.println(totalFood);
+    }
+}
