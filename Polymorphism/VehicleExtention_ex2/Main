@@ -1,0 +1,71 @@
+package Polymorphism.VehicleExtention_ex2;
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        HashMap<String, VehicleImpl> vehicles = new HashMap<>();
+        for (int i = 0; i < 3; i++) {
+            String[] inputVehicle = scanner.nextLine().split("\\s+");
+            String vehicleType = inputVehicle[0];
+            double fuelQuantity = Double.parseDouble(inputVehicle[1]);
+            double littersPerKm = Double.parseDouble(inputVehicle[2]);
+            double tankCapacity = Double.parseDouble(inputVehicle[3]);
+            switch (vehicleType) {
+                case "Car":
+                    VehicleImpl car = new Car(fuelQuantity, littersPerKm, tankCapacity);
+                    vehicles.putIfAbsent(vehicleType, car);
+                    break;
+                case "Truck":
+                    VehicleImpl truck = new Truck(fuelQuantity, littersPerKm, tankCapacity);
+                    vehicles.putIfAbsent(vehicleType, truck);
+                    break;
+                case "Bus":
+                    VehicleImpl bus = new Bus(fuelQuantity, littersPerKm, tankCapacity);
+                    vehicles.putIfAbsent(vehicleType, bus);
+                    break;
+            }
+        }
+
+        int numberOfCommand = Integer.parseInt(scanner.nextLine());
+        for (int i = 0; i < numberOfCommand; i++) {
+            String[] command = scanner.nextLine().split("\\s+");
+            switch (command[0]) {
+                case "Drive":
+                    double distance = Double.parseDouble(command[2]);
+                    if (command[1].equals("Car")) {
+                        vehicles.get("Car").driving(distance, 0.9);
+                    } else if (command[1].equals("Truck")) {
+                        vehicles.get("Truck").driving(distance, 1.6);
+                    } else if (command[1].equals("Bus")) {
+                        vehicles.get("Bus").driving(distance, 1.4);
+                    }
+                    break;
+                case "Refuel":
+                    double litters = Double.parseDouble(command[2]);
+                    if (command[1].equals("Car")) {
+                        vehicles.get("Car").refueling(litters);
+                    } else if (command[1].equals("Truck")) {
+                        vehicles.get("Truck").refueling(litters);
+                    } else if (command[1].equals("Bus")) {
+                        vehicles.get("Bus").refueling(litters);
+                    }
+                    break;
+                case "DriveEmpty":
+                    double distanceBusWithoutPeople = Double.parseDouble(command[2]);
+                    vehicles.get("Bus").driving(distanceBusWithoutPeople, 0);
+                    break;
+            }
+        }
+
+        System.out.println(vehicles.get("Car").toString());
+        System.out.println(vehicles.get("Truck").toString());
+        System.out.println(vehicles.get("Bus").toString());
+
+        //vehicles.values().forEach(v -> System.out.println(v.toString()));
+
+    }
+}
