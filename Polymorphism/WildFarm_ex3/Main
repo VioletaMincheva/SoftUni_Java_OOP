@@ -1,0 +1,85 @@
+package Polymorphism.WildFarm_ex3;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+
+        List<Animal> allAnimals = new ArrayList<>();
+
+        String command = scanner.nextLine();
+        while (!command.equals("End")) {
+            String[] animalInfo = command.split("\\s+");
+            Animal animal = createAnimal(animalInfo);
+
+            String[] foodInfo = scanner.nextLine().split("\\s+");
+            Food food = createFood(foodInfo);
+
+            animal.makeSound();
+
+            try {
+                animal.eat(food);
+            } catch (IllegalArgumentException exception) {
+                System.out.println(exception.getMessage());
+            }
+            allAnimals.add(animal);
+
+            command = scanner.nextLine();
+        }
+
+        for (Animal currentAnimal : allAnimals) {
+            System.out.println(currentAnimal.toString());
+        }
+    }
+
+    private static Animal createAnimal(String[] animalInfo) {
+        String animalType = animalInfo[0];
+        String animalName = animalInfo[1];
+        Double animalWeight = Double.parseDouble(animalInfo[2]);
+        String animalLivingRegion = animalInfo[3];
+        Animal animal;
+
+        switch (animalType) {
+            case "Mouse":
+                animal = new Mouse(animalName, animalType, animalWeight, animalLivingRegion);
+                break;
+            case "Zebra":
+                animal = new Zebra(animalName, animalType, animalWeight, animalLivingRegion);
+                break;
+            case "Cat":
+                String breed = animalInfo[4];
+                animal = new Cat(animalName, animalType, animalWeight, animalLivingRegion, breed);
+                break;
+            case "Tiger":
+                animal = new Tiger(animalName, animalType, animalWeight, animalLivingRegion);
+                break;
+            default:
+                throw new IllegalArgumentException("Unexpected value: " + animalType);
+        }
+
+        return animal;
+    }
+
+    private static Food createFood(String[] foodInfo) {
+        String foodType = foodInfo[0];
+        Integer foodQuantity = Integer.parseInt(foodInfo[1]);
+        Food food;
+
+        switch (foodType) {
+            case "Vegetable":
+                food = new Vegetable(foodQuantity);
+                break;
+            case "Meat":
+                food = new Meat(foodQuantity);
+                break;
+            default:
+                throw new IllegalArgumentException("Unexpected value: " + foodType);
+        }
+
+        return food;
+    }
+}
