@@ -1,0 +1,14 @@
+package solidLab.p01_SingleResponsibility.p01_DrawingShape;
+
+public class Main {
+    public static void main(String[] args) {
+
+        ShapeRepository shapeRepository = new ShapeRepository();
+        DrawingManagerImpl drawingManager = new DrawingManagerImpl(shapeRepository, new RendererImpl());
+
+        shapeRepository.addShape(new Rectangle(10,20));
+        shapeRepository.addShape(new Circle());
+
+        drawingManager.drawAll();
+    }
+}
