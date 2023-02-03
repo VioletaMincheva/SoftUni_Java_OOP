@@ -1,0 +1,25 @@
+package ExceptionsAndErrorHandling;
+
+import java.util.Scanner;
+
+public class SquareRoot_lab2 {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        try {
+            int number = Integer.parseInt(input);
+            if (number >= 0) {
+                double sqrtNumber = Math.sqrt(number);
+                System.out.printf("%.2f%n", sqrtNumber);
+            } else {
+                System.out.println("Invalid");
+            }
+        } catch (Exception exception) {
+            System.out.println("Invalid");
+        } finally {
+            System.out.println("Goodbye");
+        }
+    }
+}
