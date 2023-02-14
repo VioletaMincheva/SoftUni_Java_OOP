@@ -1,0 +1,77 @@
+package blueOrigin;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class SpaceshipTests {
+    private String name1 = "Borko";
+    private String name2 = "Krisi";
+    private double oxygenInPercentage1 = 60.5;
+    private double oxygenInPercentage2 = 99.9;
+    private Astronaut astronaut1;
+    private Astronaut astronaut2;
+    private Spaceship testSpaceship;
+
+    @Before
+    public void SetUp() {
+        astronaut1 = new Astronaut(name1, oxygenInPercentage1);
+        astronaut2 = new Astronaut(name2, oxygenInPercentage2);
+        testSpaceship = new Spaceship("Ball", 1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetCapacity() {
+        testSpaceship.add(astronaut1);
+        testSpaceship.add(astronaut2);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetNegativeCapacity() {
+        testSpaceship = new Spaceship("Dog", -3);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testSetEmptySpaceshipName() {
+        testSpaceship = new Spaceship("  ", 40);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testSetNullSpaceshipName() {
+        testSpaceship = new Spaceship(null, 40);
+    }
+
+    @Test
+    public void testCountMethod() {
+        testSpaceship.add(astronaut1);
+        Assert.assertEquals(1, testSpaceship.getCount());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddExistingAstronaut() {
+        testSpaceship = new Spaceship("Cat", 2);
+        testSpaceship.add(astronaut1);
+        testSpaceship.add(astronaut1);
+    }
+
+    @Test
+    public void testRemoveMethodWithExistingAstronaut() {
+        testSpaceship = new Spaceship("Cat", 2);
+        testSpaceship.add(astronaut1);
+        Assert.assertTrue(testSpaceship.remove(name1));
+    }
+    @Test
+    public void testRemoveMethodWithNonExistingAstronaut() {
+        testSpaceship = new Spaceship("Cat", 2);
+        testSpaceship.add(astronaut1);
+        Assert.assertFalse(testSpaceship.remove(name2));
+    }
+    @Test
+    public void testGetNameMethod(){
+        testSpaceship.add(astronaut2);
+        Assert.assertEquals("Krisi",name2 );
+    }
+}
