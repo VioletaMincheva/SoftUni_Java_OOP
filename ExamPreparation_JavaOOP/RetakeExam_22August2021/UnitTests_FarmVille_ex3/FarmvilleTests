@@ -1,0 +1,80 @@
+package farmville;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class FarmvilleTests {
+    private String animalName1 = "Dog";
+    private String animalName2 = "Fish";
+    private double animalEnergy1 = 25.5;
+    private double animalEnergy2 = 78.8;
+    private Animal animal1;
+    private Animal animal2;
+    private Farm farm;
+    private Collection<Animal> testAnimalsCollections;
+
+    @Before
+    public void SetUP() {
+        animal1 = new Animal(animalName1, animalEnergy1);
+        animal2 = new Animal(animalName2, animalEnergy2);
+        farm = new Farm("farm", 2);
+        testAnimalsCollections = new ArrayList<>();
+    }
+
+    @Test
+    public void testGetCountMethod() {
+        farm.add(animal1);
+        farm.add(animal2);
+        Assert.assertEquals(2, farm.getCount());
+    }
+
+    @Test
+    public void testGetNameFarmMethod() {
+        Assert.assertEquals("farm", farm.getName());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testSetNullName() {
+        farm = new Farm(null, 5);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testSetEmptyName() {
+        farm = new Farm("  ", 10);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNegativeCapacity() {
+        farm = new Farm("testFarm", -5);
+    }
+
+    @Test
+    public void testRemoveExistingAnimal() {
+        farm.add(animal1);
+        Assert.assertTrue(farm.remove(animal1.getType()));
+    }
+
+    @Test
+    public void testRemoveNonExistingAnimal() {
+        farm.add(animal1);
+        Assert.assertFalse(farm.remove(animal2.getType()));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddMethod1() {
+        farm = new Farm("testFarm", 1);
+        farm.add(animal1);
+        farm.add(animal2);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddMethod2() {
+      farm.add(animal1);
+      farm.add(animal1);
+    }
+}
+
