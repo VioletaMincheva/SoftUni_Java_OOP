@@ -1,0 +1,11 @@
+Petar Petrov, petar.petrov@gmail.com, +359888123456, 1995-Jan-28, 1400.40 
+Yani Georgiev, yani.georgiev@icloud.com, +359881987654, 1993-Feb-03, 1905.00
+Desislava Ivanova, desislava.ivanova@abv.bg, +359891234987, 1988-Apr-14, 2408.56
+Boris Petrov, boris.petrov@gmail.com, +359897145678, 1980-Jun-19, 2890.09
+Iliyan Simeonov, iliyan.simeonov@abv.bg, +359898123098, 1986-Sep-12, 1890.48
+Simeon Toshev, simeon.toshev@abv.bg, +359897098765, 2001-Mar-31, 3000.29
+Hristina Kostova, hristina.kostova@icloud.com, +359888987654, 1997-Jul-27, 3200.87
+Alexander Trifonov, alexander.trifonov@gmail.com, +359897345678, 1994-Mar-23, 2560.87
+Raya Ilieva, raya.ilieva@icloud.com, +359897145673, 1997-Sep-7, 3100.89
+Radoslav Minchev, radoslav.minchev@gmail.com, +359899123789, 1989-Nov-02, 3800.76
+Marina Ivanova, marina.ivanova@icloud.com, +359897987654, 1987-Dec-13, 4100.31
